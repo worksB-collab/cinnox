@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LineBotConfiguration {
-    
-    @Value("line.bot.channel-token")
+
+    @Value("${line.bot.channel-token}")
     private String channelAccessToken;
-    
+
     @Bean
     public LineMessagingClient lineMessagingClient() {
         return LineMessagingClient.builder(channelAccessToken)
-                                  .build();
+                .build();
     }
 }
 

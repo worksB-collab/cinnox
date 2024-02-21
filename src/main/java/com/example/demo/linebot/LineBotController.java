@@ -21,7 +21,7 @@ public class LineBotController {
     final String text = event.getMessage()
                              .getText();
     
-    messageService.createMessage(userId, text);
+    messageService.receiveMessage(userId, text);
     
     return new TextMessage(text);
   }
