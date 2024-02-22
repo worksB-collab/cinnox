@@ -15,14 +15,11 @@ public class LineBotController {
   private MessageService messageService;
   
   @EventMapping
-  public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-    final String userId = event.getSource()
-                               .getUserId();
-    final String text = event.getMessage()
-                             .getText();
-    
+  public TextMessage handleTextMessageEvent(final MessageEvent<TextMessageContent> event) {
+    final String userId = event.getSource().getUserId();
+    final String text = event.getMessage().getText();
     messageService.receiveMessage(userId, text);
-    
+
     return new TextMessage(text);
   }
 }
