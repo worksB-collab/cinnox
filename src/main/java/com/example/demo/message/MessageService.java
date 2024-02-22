@@ -6,7 +6,9 @@ import com.linecorp.bot.model.message.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 public class MessageService {
@@ -32,5 +34,12 @@ public class MessageService {
     } catch (InterruptedException | ExecutionException e) {
       e.printStackTrace();
     }
+  }
+
+  public List<MessageDto> getMessageByUserId(final String userId) {
+    final List<Message> messageList = messageDao.findByUserId(userId);
+    return messageList.stream()
+            .map(message -> new MessageDto(message.getText(), message.getTimestamp()))
+            .collect(Collectors.toList());
   }
 }
